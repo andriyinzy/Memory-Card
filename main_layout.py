@@ -1,14 +1,14 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import (
-    QApplication, QWidget,
-    QTableWidget, QListView, QListWidgetItem,
-    QLineEdit, QFormLayout,
-    QHBoxLayout, QVBoxLayout,
-    QGroupBox, QButtonGroup, QRadioButton,
-    QPushButton, QLabel, QSpinBox)
+        QApplication, QWidget, 
+        QTableWidget, QListView, QListWidgetItem,
+        QLineEdit, QFormLayout,
+        QHBoxLayout, QVBoxLayout, 
+        QGroupBox, QButtonGroup, QRadioButton,  
+        QPushButton, QLabel, QSpinBox)
 from main_app import app
-from main_edit import *
-from main_window import *
+from main_edit import layout_form
+from main_window import layout_card
 
 list_questions = QListView()
 wdgt_edit = QWidget()
@@ -37,3 +37,4 @@ main_line2.addStretch(1)
 layout_main = QVBoxLayout()
 layout_main.addLayout(main_line1)
 layout_main.addLayout(main_line2)
+

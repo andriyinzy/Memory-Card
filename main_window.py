@@ -1,84 +1,101 @@
-from PyQt5.QtWidgets import (QWidget, QPushButton, QLabel, QSpinBox, QRadioButton, QGroupBox, 
-                             QButtonGroup, QHBoxLayout, QVBoxLayout)
-from main_app import app
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import (
+        QApplication, QWidget, 
+        QTableWidget, QListWidget, QListWidgetItem,
+        QLineEdit, QFormLayout,
+        QHBoxLayout, QVBoxLayout, 
+        QGroupBox, QButtonGroup, QRadioButton,  
+        QPushButton, QLabel, QSpinBox)
+from main_app import app 
 
-window = QWidget()
-
-btn_menu = QPushButton("Menu")
-btn_rest = QPushButton("Rest")
-btn_next = QPushButton("Submit")
-btn_edit = QPushButton("Edit")
-sp_rest = QSpinBox()
-
-#ANSWER BOX
-radio_group_box = QGroupBox("Ansverrs")
-radio_group = QButtonGroup()
-
-
-rbtn_ans1 = QRadioButton("1")
-rbtn_ans2 = QRadioButton("2")
-rbtn_ans3 = QRadioButton("3")
-rbtn_ans4 = QRadioButton("4")
-
-radio_group.addButton(rbtn_ans1)
-radio_group.addButton(rbtn_ans2)
-radio_group.addButton(rbtn_ans3)
-radio_group.addButton(rbtn_ans4)
-
-#RESULT BOX
-ans_group_box = QGroupBox('Result')
-lb_result = QLabel('')
-lb_correct = QLabel('')
-layout_res =QVBoxLayout()
-layout_res.addWidget(lb_result, alignment=(Qt.AlignLeft | Qt.AlignTop))
-layout_res.addWidget(lb_correct, alignment=(Qt.AlignHCenter | stretch = 2))
-ans_group_box.setLayout(layout_res)
-ans_group_box.hide()
+btn_Menu = QPushButton('Menu') 
+btn_Sleep = QPushButton('Rest') 
+box_Minutes = QSpinBox() 
+box_Minutes.setValue(30)
+btn_OK = QPushButton('Submit') 
+lb_Question = QLabel('') 
 
 
-layout_ans1 = QHBoxLayout()
+RadioGroupBox = QGroupBox("Answers") 
+RadioGroup = QButtonGroup()
+
+rbtn_1 = QRadioButton('')
+rbtn_2 = QRadioButton('')
+rbtn_3 = QRadioButton('')
+rbtn_4 = QRadioButton('')
+
+RadioGroup.addButton(rbtn_1)
+RadioGroup.addButton(rbtn_2)
+RadioGroup.addButton(rbtn_3)
+RadioGroup.addButton(rbtn_4)
+
+
+layout_ans1 = QHBoxLayout()   
 layout_ans2 = QVBoxLayout()
 layout_ans3 = QVBoxLayout()
-
-layout_ans2.addWidget(rbtn_ans1)
-layout_ans2.addWidget(rbtn_ans2)
-layout_ans3.addWidget(rbtn_ans3)
-layout_ans3.addWidget(rbtn_ans4)
+layout_ans2.addWidget(rbtn_1)
+layout_ans2.addWidget(rbtn_2)
+layout_ans3.addWidget(rbtn_3)
+layout_ans3.addWidget(rbtn_4)
 
 layout_ans1.addLayout(layout_ans2)
 layout_ans1.addLayout(layout_ans3)
-radio_group_box.setLayout(layout_ans1)
 
-menu_line = QHBoxLayout()
-main_line = QVBoxLayout()
+RadioGroupBox.setLayout(layout_ans1) 
+AnsGroupBox = QGroupBox("Result")
+lb_Result = QLabel('') 
+lb_Correct = QLabel('') 
 
-time_lbl = QLabel("minuts")
-question_lbl = QLabel("Question")
 
-menu_line.addWidget(btn_menu)
-menu_line.addWidget(btn_rest)
-menu_line.addWidget(sp_rest)
-menu_line.addWidget(time_lbl)
+layout_res = QVBoxLayout()
+layout_res.addWidget(lb_Result, alignment=(Qt.AlignLeft | Qt.AlignTop))
+layout_res.addWidget(lb_Correct, alignment=Qt.AlignHCenter, stretch=2)
+AnsGroupBox.setLayout(layout_res)
+AnsGroupBox.hide()
 
-main_line.addLayout(menu_line)
-main_line.addWidget(question_lbl)
-main_line.addWidget(radio_group_box)
-main_line.addWidget(btn_next)
 
-#window.setLayout(main_line)
+layout_line1 = QHBoxLayout() 
+layout_line2 = QHBoxLayout() 
+layout_line3 = QHBoxLayout() 
+layout_line4 = QHBoxLayout() 
+
+layout_line1.addWidget(btn_Menu)
+layout_line1.addStretch(1) 
+layout_line1.addWidget(btn_Sleep)
+layout_line1.addWidget(box_Minutes)
+layout_line1.addWidget(QLabel('minuts'))
+
+layout_line2.addWidget(lb_Question, 
+                       alignment=(Qt.AlignHCenter | Qt.AlignVCenter))
+layout_line3.addWidget(RadioGroupBox)
+layout_line3.addWidget(AnsGroupBox)
+
+layout_line4.addStretch(1)
+layout_line4.addWidget(btn_OK, stretch=2)
+layout_line4.addStretch(1)
+
+
+layout_card = QVBoxLayout()
+layout_card.addLayout(layout_line1, stretch=1)
+layout_card.addLayout(layout_line2, stretch=2)
+layout_card.addLayout(layout_line3, stretch=8)
+layout_card.addStretch(1)
+layout_card.addLayout(layout_line4, stretch=1)
+layout_card.addStretch(1)
+layout_card.setSpacing(5) 
 
 def show_result():
-    radio_group_box.hide()
-    ans_group_box.show()
-    btn_next.setText('Next question')
+    RadioGroupBox.hide()
+    AnsGroupBox.show()
+    btn_OK.setText('Next question')
 
 def show_question():
-    radio_group_box.hide()
-    ans_group_box.show()
-    btn_next.setText('Submit')
-    radio_group_box.setExclusive(False)
-    rbtn_ans1.setChecked(False)
-    rbtn_ans2.setChecked(False)
-    rbtn_ans3.setChecked(False)
-    rbtn_ans4.setChecked(False)
-    radio_group_box.setExclusive(True)
+    RadioGroupBox.show()
+    AnsGroupBox.hide()
+    btn_OK.setText('Submit')
+    RadioGroup.setExclusive(False)
+    rbtn_1.setChecked(False)
+    rbtn_2.setChecked(False)
+    rbtn_3.setChecked(False)
+    rbtn_4.setChecked(False)
+    RadioGroup.setExclusive(True)
